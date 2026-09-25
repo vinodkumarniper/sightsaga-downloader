@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       urls:
-        description: "Public media URLs (one per line)"
+        description: "Public media URL(s), separated by spaces or commas"
         required: true
         type: string
       mode:
@@ -73,8 +73,11 @@ jobs:
         run: |
           python - <<'PY'
           import os
+          import re
           from pathlib import Path
-          Path("sources.txt").write_text(os.environ["URLS"].strip() + "\n", encoding="utf-8")
+          raw = os.environ["URLS"].strip()
+          urls = [item for item in re.split(r"[\s,]+", raw) if item]
+          Path("sources.txt").write_text("\n".join(urls) + "\n", encoding="utf-8")
           PY
 
       - name: Download
