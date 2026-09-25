@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sightsaga-downloader"
+version = "0.1.0"
+description = "Safe, automation-friendly downloader for publicly accessible media"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "SightSaga" }]
+dependencies = [
+  "yt-dlp>=2025.9.5,<2027",
+]
+
+[project.scripts]
+sightsaga-download = "sightsaga_downloader.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
