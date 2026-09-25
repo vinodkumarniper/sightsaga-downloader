@@ -57,7 +57,7 @@ By default, media is stored in `downloads/`, completed IDs are recorded in `down
 1. Open the repository's **Actions** tab.
 2. Select **Download public media**.
 3. Choose **Run workflow**.
-4. Paste one public URL per line, choose the mode and limit, then run it.
+4. Paste one or more public URLs, separated by spaces or commas, choose the mode and limit, then run it.
 5. When the job completes, download the `sightsaga-downloads-*` artifact.
 
 Artifacts expire after 7 days. GitHub-hosted runners have storage, bandwidth, and execution limits, so use the workflow for modest public-footage jobs rather than large archives.
