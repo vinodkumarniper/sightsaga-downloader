@@ -186,6 +186,8 @@ def download_urls(
     dry_run: bool,
     ydl_class: Any | None = None,
 ) -> list[DownloadResult]:
+    from yt_dlp.utils import MaxDownloadsReached
+
     if ydl_class is None:
         from yt_dlp import YoutubeDL
 
@@ -203,6 +205,14 @@ def download_urls(
                     results.append(
                         DownloadResult(url=url, status="skipped", error="No media entries returned").with_timestamp()
                     )
+            except MaxDownloadsReached:
+                results.append(
+                    DownloadResult(
+                        url=url,
+                        status="limit-reached",
+                    ).with_timestamp()
+                )
+                break
             except Exception as exc:  # yt-dlp raises extractor-specific exception types
                 results.append(
                     DownloadResult(
