@@ -1,1 +1,97 @@
+name: Download public media
 
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: "Public media URLs (one per line)"
+        required: true
+        type: string
+      mode:
+        description: "Download mode"
+        required: true
+        default: video
+        type: choice
+        options:
+          - video
+          - audio
+          - metadata-only
+      max_downloads:
+        description: "Maximum playlist entries (1-100)"
+        required: true
+        default: "25"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sightsaga-download-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install --yes ffmpeg
+
+      - name: Install package
+        run: python -m pip install .
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Validate maximum
+        env:
+          MAX_DOWNLOADS: ${{ inputs.max_downloads }}
+        run: |
+          python - <<'PY'
+          import os
+          value = os.environ["MAX_DOWNLOADS"]
+          try:
+              limit = int(value)
+          except ValueError as exc:
+              raise SystemExit("max_downloads must be an integer") from exc
+          if not 1 <= limit <= 100:
+              raise SystemExit("max_downloads must be between 1 and 100")
+          PY
+
+      - name: Prepare URL list
+        env:
+          URLS: ${{ inputs.urls }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          Path("sources.txt").write_text(os.environ["URLS"].strip() + "\n", encoding="utf-8")
+          PY
+
+      - name: Download
+        env:
+          MAX_DOWNLOADS: ${{ inputs.max_downloads }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          args=(--url-file sources.txt --output-dir downloads --max-downloads "$MAX_DOWNLOADS")
+          if [[ "$MODE" == "audio" ]]; then args+=(--audio-only); fi
+          if [[ "$MODE" == "metadata-only" ]]; then args+=(--dry-run); fi
+          sightsaga-download "${args[@]}"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sightsaga-downloads-${{ github.run_number }}
+          path: downloads/
+          if-no-files-found: warn
+          retention-days: 7
