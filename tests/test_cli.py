@@ -3,6 +3,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from yt_dlp.utils import MaxDownloadsReached
+
 from sightsaga_downloader.cli import (
     DEFAULT_FORMAT,
     DownloadResult,
@@ -88,6 +90,8 @@ class FakeYoutubeDL:
         return None
 
     def extract_info(self, url, download):
+        if "limit" in url:
+            raise MaxDownloadsReached()
         if "fail" in url:
             raise RuntimeError("fixture failure")
         return {
@@ -104,6 +108,18 @@ class FakeYoutubeDL:
 
 
 class DownloadTests(unittest.TestCase):
+    def test_max_downloads_is_a_clean_stop(self):
+        urls = [
+            "https://example.com/ok",
+            "https://example.com/limit",
+            "https://example.com/not-reached",
+        ]
+        results = download_urls(urls, {}, dry_run=False, ydl_class=FakeYoutubeDL)
+        self.assertEqual(
+            [result.status for result in results],
+            ["downloaded", "limit-reached"],
+        )
+
     def test_download_results_and_failures(self):
         urls = ["https://example.com/ok", "https://example.com/fail"]
         results = download_urls(urls, {}, dry_run=False, ydl_class=FakeYoutubeDL)
