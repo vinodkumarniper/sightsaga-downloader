@@ -1,0 +1,26 @@
+name: One-off protest reel audio
+on:
+  push:
+    branches:
+      - reel-audio-20260929
+permissions:
+  contents: read
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download approved ElevenLabs audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audio
+          curl -L --fail --retry 3 -o audio/bunty_voiceover.mp3 'https://storage.googleapis.com/xi-backend/database/workspace/b8d6c7361e7a4cfd924285cd6d01fb56/content_generation/0bNlJrtIAXw7DMWu2fDr/NoQisEQl5xqVyufdESWB/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T181409Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=841e70e475a32232bf4895bf7d8a012b05d6f2dcf99681a29ad412edbc68a4c011ae1a366bd36a0d91b5ad05c78f420c7053317c0a9a34d3f880ede6bd2a88301486868f1512a997297e9f1a69098a51740d2b0c3182b04aca9a097cecc41d46bf8368a003b0955f1a883c69fd155976cd29d147c2c5bca91263884976a1a0ca311b1325762425d9c347406e9e1c18310769ff2765b51e1dcc74ca4f9d7741f0f98fdcdc4a473604fc3aaf157bc9f404ba57ff41bb41cb91809289946716cddf8912b807b0c3f7c444ba5e31e6f5c44c686529aff7018c39ecb31125639cc299ca4f3be6111a699a5ae3cdfcfd82a249a5ef0949f8f99e79dd55464d1cc6e174'
+          curl -L --fail --retry 3 -o audio/sightsaga_music.mp3 'https://storage.googleapis.com/xi-backend/database/workspace/b8d6c7361e7a4cfd924285cd6d01fb56/content_generation/pZ6V5483TS1lcyx1jobN/xWbAZ3rZdwEIrn9uEQUK/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T181410Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=64db14518898b5335b9a9da5681c987ea50f68443477433d49e930c6f5942c67bd41e68e0a5dffd62e6ea02a3cfe9a22f4ca69562e591c466803f7bca013da9f549b42aa47c19011e99915990578105b865b9c4bae10e2c5b582fe2ea859c3ec117a2fa089a57fcd81293724f137b8f8c58bcc20fa5066dc43293bc9b11c41e0f10e7cb255b36df456fd6cc6719848859a68286b6074d58954a13a1708536d1d801f923227c09fbb857a4636e29613222b53daba2fdc9f89cc93b16fbca3ed1c65a7b195a5e81852594c2b3a9b7608e7231b86302483438235c879bf1c439568ab7df5ce4ba32500fcd225bfcb54cec96c62af5fd6f1fb9dcc843075b41db428'
+          ls -lh audio
+      - name: Upload audio bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: peaceful-protest-reel-audio
+          path: audio/
+          retention-days: 2
