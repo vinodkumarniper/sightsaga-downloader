@@ -1,0 +1,10 @@
+01_phone_passcode.mp4|https://videos.pexels.com/video-files/6611949/6611949-uhd_2160_3840_25fps.mp4
+02_buddy_map.mp4|https://videos.pexels.com/video-files/4873827/4873827-uhd_3840_2160_25fps.mp4
+03_buddy_phone_vertical.mp4|https://videos.pexels.com/video-files/5882151/5882151-uhd_2160_3840_24fps.mp4
+04_delhi_barricade.mp4|https://videos.pexels.com/video-files/16668725/16668725-uhd_3840_2160_24fps.mp4
+05_essentials_water_reference.mp4|https://videos.pexels.com/video-files/8726710/8726710-uhd_2160_3840_24fps.mp4
+06_offline_map_vertical.mp4|https://videos.pexels.com/video-files/4546853/4546853-hd_1080_1920_25fps.mp4
+07_document_phone_vertical.mp4|https://videos.pexels.com/video-files/8115521/8115521-uhd_2160_3840_24fps.mp4
+08_document_street_alt.mp4|https://videos.pexels.com/video-files/15689208/15689208-hd_1080_1920_24fps.mp4
+09_lawyer_consultation.mp4|https://videos.pexels.com/video-files/8061600/8061600-uhd_3840_2160_25fps.mp4
+10_hong_kong_supply_chain.webm|https://upload.wikimedia.org/wikipedia/commons/7/7d/Hong_Kong_Protestors_Deliver_Supplies_on_Human_Assembly_Line.webm
