@@ -1,0 +1,42 @@
+name: One-time Hong Kong CC0 archive fetch
+
+on:
+  push:
+    paths:
+      - ".github/workflows/hk-archive-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Download CC0 archive footage
+        run: |
+          mkdir -p downloads
+          curl -L --fail --retry 3 \
+            "https://upload.wikimedia.org/wikipedia/commons/4/45/Hong_Kong_VID_20190616_174943.webm" \
+            -o downloads/hong_kong_2019_cc0.webm
+      - name: Make edit-friendly MP4
+        run: |
+          ffmpeg -y -i downloads/hong_kong_2019_cc0.webm \
+            -vf "scale=-2:1080" -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k \
+            downloads/hong_kong_2019_cc0_1080p.mp4
+      - name: Attribution note
+        run: |
+          cat > downloads/SOURCE.txt <<'EOF'
+          Source: Wikimedia Commons
+          File: Hong Kong VID 20190616 174943.webm
+          Date: 17 June 2019
+          Author: Studio Incendo
+          License: CC0 1.0 Universal
+          Source page: https://commons.wikimedia.org/wiki/File:Hong_Kong_VID_20190616_174943.webm
+          EOF
+      - name: Upload footage
+        uses: actions/upload-artifact@v4
+        with:
+          name: sightsaga-hk-cc0
+          path: downloads/
+          retention-days: 7
