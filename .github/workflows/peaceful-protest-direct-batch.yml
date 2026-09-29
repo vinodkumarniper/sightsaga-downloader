@@ -1,0 +1,51 @@
+name: Peaceful protest direct footage batch
+
+on:
+  push:
+    paths:
+      - ".github/workflows/peaceful-protest-direct-batch.yml"
+      - "batches/peaceful-protest-guide-2026-09-29-direct.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download direct public media
+        shell: bash
+        run: |
+          set -u
+          mkdir -p downloads
+          : > downloads/manifest.txt
+          failures=0
+          while IFS='|' read -r name url; do
+            [[ -z "${name}" || "${name}" == \#* ]] && continue
+            echo "Downloading ${name}"
+            if curl -fL --retry 3 --retry-delay 2 --connect-timeout 30 \
+              -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36" \
+              -H "Referer: https://www.pexels.com/" \
+              -o "downloads/${name}" "${url}"; then
+              size=$(stat -c%s "downloads/${name}")
+              echo "OK|${name}|${size}|${url}" >> downloads/manifest.txt
+            else
+              echo "FAIL|${name}|0|${url}" >> downloads/manifest.txt
+              failures=$((failures+1))
+            fi
+          done < batches/peaceful-protest-guide-2026-09-29-direct.txt
+          echo "Failures: ${failures}"
+          exit 0
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: peaceful-protest-direct-footage-${{ github.run_number }}
+          path: downloads/
+          if-no-files-found: error
+          retention-days: 7
