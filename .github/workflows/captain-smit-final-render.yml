@@ -159,7 +159,7 @@ jobs:
           # Preserve a short piece of Smit's authentic interview voice at the opening.
           ffmpeg -y -i src/smit.mp4 -t 4 -vn -c:a aac -b:a 160k work/smit_open.m4a
 
-          ffmpeg -y -i work/video_silent.mp4 -i work/smit_open.m4a -i work/bunty.mp3 -i work/music.mp3 -i work/click.mp3             -filter_complex "[0:v]null[v];[1:a]atrim=0:4,volume=1.0[orig];[2:a]adelay=4000|4000,volume=1.10[vo];[3:a]atrim=0:70,afade=t=in:st=0:d=1,afade=t=out:st=68:d=2,volume='if(between(t,22,28),0.018,0.085)':eval=frame[mus];[4:a]atrim=0:0.8,adelay=25200|25200,volume=1.6[clk];[orig][vo][mus][clk]amix=inputs=4:duration=longest:dropout_transition=0,alimiter=limit=0.95[a]"             -map "[v]" -map "[a]" -t 70 -c:v copy -c:a aac -b:a 192k -movflags +faststart out/Captain_Smit_SightSaga_Hero_Reel.mp4
+          ffmpeg -y -i work/video_silent.mp4 -i work/smit_open.m4a -i work/bunty.mp3 -i work/music.mp3 -i work/click.mp3             -filter_complex "[1:a]atrim=0:4,volume=1.0[orig];[2:a]adelay=4000|4000,volume=1.10[vo];[3:a]atrim=0:70,afade=t=in:st=0:d=1,afade=t=out:st=68:d=2,volume='if(between(t,22,28),0.018,0.085)':eval=frame[mus];[4:a]atrim=0:0.8,adelay=25200|25200,volume=1.6[clk];[orig][vo][mus][clk]amix=inputs=4:duration=longest:dropout_transition=0,alimiter=limit=0.95[a]"             -map 0:v:0 -map "[a]" -t 70 -c:v copy -c:a aac -b:a 192k -movflags +faststart out/Captain_Smit_SightSaga_Hero_Reel.mp4
 
           ffprobe -v error -show_entries format=duration,size -of default=nw=1 out/Captain_Smit_SightSaga_Hero_Reel.mp4
 
