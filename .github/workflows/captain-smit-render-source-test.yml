@@ -1,0 +1,40 @@
+name: Captain Smit render source test
+
+on:
+  push:
+    paths:
+      - ".github/workflows/captain-smit-render-source-test.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install yt-dlp
+      - name: Test sources
+        shell: bash
+        run: |
+          set +e
+          mkdir -p testout
+          : > testout/results.txt
+          while IFS= read -r u; do
+            [ -z "$u" ] && continue
+            echo "=== $u ===" | tee -a testout/results.txt
+            yt-dlp --simulate --no-playlist --print "%(id)s|%(title)s|%(duration)s|%(ext)s" "$u" >> testout/results.txt 2>&1
+            echo "exit=$?" >> testout/results.txt
+          done < batches/captain-smit-render-source-test.txt
+          exit 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: captain-smit-render-source-test
+          path: testout/
+          retention-days: 3
