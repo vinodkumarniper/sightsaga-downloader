@@ -31,8 +31,8 @@ jobs:
           ls -lh publish/
           TAG="captain-smit-sightsaga-2026-10-02"
           ASSET="publish/Captain_Smit_SightSaga_Hero_Reel.mp4"
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" "$ASSET" --clobber
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ASSET" --clobber --repo "$GITHUB_REPOSITORY"
           else
             gh release create "$TAG" "$ASSET" \
               --target main \
