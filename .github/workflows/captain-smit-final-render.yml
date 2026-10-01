@@ -1,0 +1,121 @@
+name: Captain Smit final SightSaga reel
+
+on:
+  push:
+    paths:
+      - ".github/workflows/captain-smit-final-render.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install media tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -q yt-dlp
+
+      - name: Download authentic source footage
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p src work out text
+          yt-dlp --no-playlist -f "best[ext=mp4]/best" -o "src/smit.%(ext)s" "https://t.co/S28KLeDsv4"
+          yt-dlp --no-playlist -f "best[ext=mp4]/best" -o "src/dive.%(ext)s" "https://t.co/wtiqBYhEw1"
+          yt-dlp --no-playlist -f "best[ext=mp4]/best" -o "src/trump.%(ext)s" "https://t.co/zNDHbbEs6f"
+          yt-dlp --no-playlist -f "best[ext=mp4]/best" -o "src/modi.%(ext)s" "https://x.com/narendramodi/status/2105553094004379938"
+          yt-dlp --no-playlist -f "best[ext=mp4]/best" -o "src/rescue.%(ext)s" "https://x.com/GLZRadio/status/2105323964684030088"
+          yt-dlp --no-playlist -f "best[ext=mp4]/best" -o "src/netanyahu.%(ext)s" "https://t.co/55AgmAvzIG" ||             yt-dlp --no-playlist --download-sections "*0-25" -f "best[ext=mp4]/best" -o "src/netanyahu.%(ext)s" "https://www.foxnews.com/media/netanyahu-praises-heroic-bystander-bloody-cockpit-attack-preventing-another-9-11"
+          ls -lh src/
+
+      - name: Download narration and sound design
+        shell: bash
+        run: |
+          curl -fL 'https://storage.googleapis.com/xi-backend/database/workspace/b8d6c7361e7a4cfd924285cd6d01fb56/content_generation/rjk5uswZVdeY44m0bKho/o8wjeYlyfzG2ouyMquXE/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261001%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261001T211320Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=8aa66b0bc9aa9e7af642116ef3d017d7f67504cd8086d0ff8c810197d32e6588a7859a8718a22dae1057f59dee0ed14e3edd7721cc167df55ec47298ca700bad33eb92df2c4068634e537f6481c12af189e65d0cf82547d01ad3c363df04f54cb61d3013f2f06510fbcee9069b29ebc7a06916cdbaab2e62677742f6ee0125e1a212bd401a5501ff845ef31afcb003b5454d3ce9ef4386264ffb4e19c519b5e65657159abd634673bc27ebfb8bf2b1bc7c8de52e08893ffff9c02d0d345582f02b5028c719b272ebac8192748996e6fbfba870753743bcc4d08c7d9eecd4fdae188877ad3b96d7be869c8b1922b09fbec09e7ef6961010b3d6963edcb0c51256' -o work/bunty.mp3
+          curl -fL 'https://storage.googleapis.com/xi-backend/database/workspace/b8d6c7361e7a4cfd924285cd6d01fb56/content_generation/GbHvzQpCtuyoId9bxJDx/qKgmBaLSam5orQCALVlF/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261001%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261001T210657Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=ae04b0df10f5b7dfef031fe31e0206498525de4cdfcea289f0c3695eb47e04618945b7a2340f259d11ff4f789cdb1d48e317580b83a7e9dd6969afaa6f5a09bcaabb8209e35de10e4df2eb14237c659449fb54b503af92b55881d5aeec5a4838df06fd2c75c17ca3636090eb53de62708af60204295def266ba58ec2bf4313aab4e1478044b738c8134fab06c4f56374ac734529eeaf310170e229678e58696b7987da064d607eee21e0e12cfaa0c6fde270423df6607a03667addaa68b5b5bc8c23b4c1de3eea97be20a22c4154eed443af4790202e692455f9cef38e1808ddde56453c883125c5f514920158538c70ea98856ce6539e9c790fd29b7f259aa3' -o work/music.mp3
+          curl -fL 'https://storage.googleapis.com/xi-backend/database/workspace/b8d6c7361e7a4cfd924285cd6d01fb56/content_generation/RtlFXkMqRuWZwfo1Zz1H/qSaeE4K733hujUtCpxsG/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261001%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261001T210955Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5e14ed22d0d5909183b3cc45a9ce8b7ad02527c0a8f43faba8ae3f3bc52bac35f9161dc6980a346c0879aa4474dc067b020fb3e87eefc425ded17aeb45ca944194227f9d38348a5230252feda16fe2dfb63c2d12fb455b8a7c671d168c10d8cf84af148ac2c9425a221491f9cd945e1c4715997c3050a38abc756276b729fd71b120c8bbd76a2259fcd443895bf3ae60bab61aa14246a70ea77303738463e8c3d16e8b10e3129bd00e8d8c6ffca09d77c39d94cb882a74aa157ba2f8f397c1f4c4c8fdb65361e30dd841a795699e39d2bcac92814ee5df13e714c1a6fef1cdb08e121836f4bcbdae5adf1abd434553bce83e0dcd64dfa9094cfa919daa5c453d' -o work/click.mp3
+          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 work/bunty.mp3
+          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 work/music.mp3
+
+      - name: Build SightSaga edit
+        shell: bash
+        run: |
+          set -euo pipefail
+          FONT="/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+          REG="/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+
+          make_text () {
+            printf '%s' "$2" > "text/$1"
+          }
+
+          make_text logo.txt "SIGHTSAGA"
+          make_text t1.txt "BEFORE THE INCIDENT • 2025"
+          make_text s1.txt "CAPTAIN SMIT MACHCHHAR\nA PILOT TALKING ABOUT SAFETY"
+          make_text t2.txt "FLYDUBAI FZ1073"
+          make_text s2.txt "DUBAI → TEL AVIV\n30 SEPTEMBER 2026"
+          make_text t3.txt "THE AIRCRAFT DROPS RAPIDLY"
+          make_text s3.txt "~14,000 FT IN UNDER 30 SEC\nREUTERS / FLIGHTRADAR24"
+          make_text t5.txt "THE DOOR OPENS"
+          make_text s5.txt "PASSENGERS + CREW CAN REACH THE COCKPIT"
+          make_text t6.txt "CONTROL REGAINED"
+          make_text s6.txt "RELIEF PILOTS DIVERT TO TABUK, SAUDI ARABIA"
+          make_text t7.txt "INDIA • PM NARENDRA MODI"
+          make_text s7.txt "“HIGHEST FORM OF COURAGE.”"
+          make_text t8.txt "ISRAEL • PM BENJAMIN NETANYAHU"
+          make_text s8.txt "“HE IS A TRUE HERO.”"
+          make_text t9.txt "UNITED STATES • PRESIDENT DONALD TRUMP"
+          make_text s9.txt "“IN A WAY, HE WAS A HERO.”"
+          make_text t10.txt "THE FLIGHT SURVIVES"
+          make_text s10.txt "PASSENGERS FINALLY HEAD HOME"
+          make_text t11.txt "THE PRAISE CAME LATER"
+          make_text s11.txt "THE DECISIVE MOMENT CAME IN THE COCKPIT"
+          make_text end1.txt "CAPTAIN SMIT MACHCHHAR"
+          make_text end2.txt "COURAGE • DUTY • PRESENCE OF MIND"
+          make_text end3.txt "SIGHTSAGA SALUTES YOU"
+
+          make_seg () {
+            in="$1"; start="$2"; dur="$3"; title="$4"; sub="$5"; out="$6"
+            ffmpeg -y -ss "$start" -i "$in" -t "$dur" -an               -vf "scale=1080:1150:force_original_aspect_ratio=increase,crop=1080:1150,pad=1080:1920:0:0:color=0x061A2D,drawbox=x=0:y=1150:w=1080:h=8:color=0xFF6500:t=fill,drawtext=fontfile=$FONT:textfile=text/$title:x=(w-text_w)/2:y=1225:fontsize=54:fontcolor=0xFF6500,drawtext=fontfile=$REG:textfile=text/$sub:x=(w-text_w)/2:y=1330:fontsize=42:fontcolor=white:line_spacing=18,drawtext=fontfile=$FONT:textfile=text/logo.txt:x=w-text_w-36:y=38:fontsize=32:fontcolor=white:box=1:boxcolor=0x061A2D@0.55:boxborderw=12"               -r 30 -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p "$out"
+          }
+
+          make_seg src/smit.mp4 0 6 t1.txt s1.txt work/01.mp4
+          make_seg src/dive.mp4 0 7 t2.txt s2.txt work/02.mp4
+          make_seg src/dive.mp4 10 9 t3.txt s3.txt work/03.mp4
+
+          ffmpeg -y -f lavfi -i "color=c=0x061A2D:s=1080x1920:d=6:r=30" -an             -vf "drawbox=x=240:y=190:w=600:h=920:color=white@0.70:t=8,drawbox=x=770:y=625:w=46:h=150:color=0xFF6500:t=fill,drawbox=x=748:y=650:w=90:h=98:color=0xFF6500@0.22:t=fill:enable='gte(t,3.2)',drawtext=fontfile=$FONT:text='INJURED. STILL THINKING.':x=(w-text_w)/2:y=1200:fontsize=58:fontcolor=white,drawtext=fontfile=$FONT:text='COCKPIT DOOR RELEASE':x=(w-text_w)/2:y=1310:fontsize=52:fontcolor=0xFF6500,drawtext=fontfile=$REG:text='VISUAL RECONSTRUCTION':x=(w-text_w)/2:y=1415:fontsize=34:fontcolor=0xD6DEE5,drawtext=fontfile=$FONT:text='CLICK':x=(w-text_w)/2:y=1540:fontsize=74:fontcolor=white:enable='gte(t,3.2)',drawtext=fontfile=$FONT:textfile=text/logo.txt:x=w-text_w-36:y=38:fontsize=32:fontcolor=white"             -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p work/04.mp4
+
+          make_seg src/dive.mp4 28 8 t5.txt s5.txt work/05.mp4
+          make_seg src/rescue.mp4 0 5 t6.txt s6.txt work/06.mp4
+          make_seg src/modi.mp4 0 3 t7.txt s7.txt work/07.mp4
+          make_seg src/netanyahu.mp4 0 3 t8.txt s8.txt work/08.mp4
+          make_seg src/trump.mp4 0 3 t9.txt s9.txt work/09.mp4
+          make_seg src/rescue.mp4 8 6 t10.txt s10.txt work/10.mp4
+          make_seg src/smit.mp4 8 10 t11.txt s11.txt work/11.mp4
+
+          ffmpeg -y -f lavfi -i "color=c=0x061A2D:s=1080x1920:d=4:r=30" -an             -vf "drawtext=fontfile=$FONT:textfile=text/end1.txt:x=(w-text_w)/2:y=650:fontsize=66:fontcolor=white,drawtext=fontfile=$FONT:textfile=text/end2.txt:x=(w-text_w)/2:y=760:fontsize=38:fontcolor=0xD6DEE5,drawbox=x=260:y=855:w=560:h=7:color=0xFF6500:t=fill,drawtext=fontfile=$FONT:textfile=text/end3.txt:x=(w-text_w)/2:y=910:fontsize=50:fontcolor=0xFF6500,drawtext=fontfile=$FONT:textfile=text/logo.txt:x=(w-text_w)/2:y=1070:fontsize=36:fontcolor=white"             -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p work/12.mp4
+
+          printf "file '%s'\n" work/01.mp4 work/02.mp4 work/03.mp4 work/04.mp4 work/05.mp4 work/06.mp4 work/07.mp4 work/08.mp4 work/09.mp4 work/10.mp4 work/11.mp4 work/12.mp4 > work/concat.txt
+          ffmpeg -y -f concat -safe 0 -i work/concat.txt -c copy work/video_silent.mp4
+
+          ffmpeg -y -i work/video_silent.mp4 -i work/bunty.mp3 -i work/music.mp3 -i work/click.mp3             -filter_complex "[1:a]adelay=4000|4000,volume=1.10[vo];[2:a]atrim=0:70,afade=t=in:st=0:d=1,afade=t=out:st=68:d=2,volume='if(between(t,22,28),0.018,0.095)':eval=frame[mus];[3:a]atrim=0:0.8,adelay=25200|25200,volume=1.6[clk];[vo][mus][clk]amix=inputs=3:duration=longest:dropout_transition=0,alimiter=limit=0.95[a]"             -map 0:v -map "[a]" -t 70 -c:v copy -c:a aac -b:a 192k -movflags +faststart out/Captain_Smit_SightSaga_Hero_Reel.mp4
+
+          ffprobe -v error -show_entries format=duration,size -of default=nw=1 out/Captain_Smit_SightSaga_Hero_Reel.mp4
+
+      - name: Upload final reel
+        uses: actions/upload-artifact@v4
+        with:
+          name: captain-smit-sightsaga-final
+          path: out/Captain_Smit_SightSaga_Hero_Reel.mp4
+          if-no-files-found: error
+          retention-days: 7
