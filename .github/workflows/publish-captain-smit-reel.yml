@@ -1,0 +1,41 @@
+name: Publish Captain Smit final reel
+
+on:
+  push:
+    paths:
+      - ".github/workflows/publish-captain-smit-reel.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download final reel artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: captain-smit-sightsaga-final
+          path: publish
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: 36928933555
+
+      - name: Publish direct MP4
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          ls -lh publish/
+          TAG="captain-smit-sightsaga-2026-10-02"
+          ASSET="publish/Captain_Smit_SightSaga_Hero_Reel.mp4"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ASSET" --clobber
+          else
+            gh release create "$TAG" "$ASSET" \
+              --target main \
+              --title "Captain Smit — SightSaga Hero Reel" \
+              --notes "Final 70-second vertical SightSaga reel. Authentic public-source footage, Hindi Bunty narration, original Smit opening audio, and clearly labelled visual reconstruction."
+          fi
