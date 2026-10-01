@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/captain-smit-quick-download-test.yml"
+      - "batches/captain-smit-x-test-2026-10-02.txt"
   workflow_dispatch:
 
 permissions:
@@ -26,19 +27,19 @@ jobs:
       - name: Install package
         run: python -m pip install .
 
-      - name: Download selected Captain Smit footage
+      - name: Download selected Captain Smit X footage
         run: |
           sightsaga-download \
-            --url-file batches/captain-smit-download-test-2026-10-02.txt \
+            --url-file batches/captain-smit-x-test-2026-10-02.txt \
             --output-dir downloads \
-            --max-downloads 4 \
+            --max-downloads 2 \
             --format "best[ext=mp4]/best"
 
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: captain-smit-quick-download-test-${{ github.run_number }}
+          name: captain-smit-x-download-test-${{ github.run_number }}
           path: downloads/
           if-no-files-found: warn
           retention-days: 7
