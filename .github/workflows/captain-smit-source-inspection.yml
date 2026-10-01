@@ -1,0 +1,31 @@
+name: Captain Smit source inspection pack
+
+on:
+  push:
+    paths:
+      - ".github/workflows/captain-smit-source-inspection.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -q yt-dlp
+      - name: Download source clips
+        run: |
+          mkdir -p src
+          yt-dlp --no-playlist -f "best[ext=mp4]/best" -o "src/netanyahu.%(ext)s" "https://x.com/netanyahu/status/2105339034700841393"
+          yt-dlp --no-playlist -f "best[ext=mp4]/best" -o "src/trump.%(ext)s" "https://x.com/clashreport/status/2105403278909673976"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: captain-smit-source-inspection
+          path: src/
+          retention-days: 2
