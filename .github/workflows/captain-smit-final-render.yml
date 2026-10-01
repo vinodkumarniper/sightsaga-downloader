@@ -111,7 +111,7 @@ jobs:
 
           ffmpeg -y -f lavfi -i "color=c=0x061A2D:s=1080x1920:d=4:r=30" -an             -vf "drawtext=fontfile=$FONT:textfile=text/end1.txt:x=(w-text_w)/2:y=650:fontsize=66:fontcolor=white,drawtext=fontfile=$FONT:textfile=text/end2.txt:x=(w-text_w)/2:y=760:fontsize=38:fontcolor=0xD6DEE5,drawbox=x=260:y=855:w=560:h=7:color=0xFF6500:t=fill,drawtext=fontfile=$FONT:textfile=text/end3.txt:x=(w-text_w)/2:y=910:fontsize=50:fontcolor=0xFF6500,drawtext=fontfile=$FONT:textfile=text/logo.txt:x=(w-text_w)/2:y=1070:fontsize=36:fontcolor=white"             -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p work/12.mp4
 
-          printf "file '%s'\n" work/01.mp4 work/02.mp4 work/03.mp4 work/04.mp4 work/05.mp4 work/06.mp4 work/07.mp4 work/08.mp4 work/09.mp4 work/10.mp4 work/11.mp4 work/12.mp4 > work/concat.txt
+          printf "file '%s'\n" 01.mp4 02.mp4 03.mp4 04.mp4 05.mp4 06.mp4 07.mp4 08.mp4 09.mp4 10.mp4 11.mp4 12.mp4 > work/concat.txt
           ffmpeg -y -f concat -safe 0 -i work/concat.txt -c copy work/video_silent.mp4
 
           ffmpeg -y -i work/video_silent.mp4 -i work/bunty.mp3 -i work/music.mp3 -i work/click.mp3             -filter_complex "[1:a]adelay=4000|4000,volume=1.10[vo];[2:a]atrim=0:70,afade=t=in:st=0:d=1,afade=t=out:st=68:d=2,volume='if(between(t,22,28),0.018,0.095)':eval=frame[mus];[3:a]atrim=0:0.8,adelay=25200|25200,volume=1.6[clk];[vo][mus][clk]amix=inputs=3:duration=longest:dropout_transition=0,alimiter=limit=0.95[a]"             -map 0:v -map "[a]" -t 70 -c:v copy -c:a aac -b:a 192k -movflags +faststart out/Captain_Smit_SightSaga_Hero_Reel.mp4
