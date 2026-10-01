@@ -23,9 +23,14 @@ jobs:
 
       - name: Install media tools
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
           python -m pip install -q yt-dlp
+          mkdir -p "$HOME/ffmpeg-bin"
+          curl -fL --retry 3 https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz -o /tmp/ffmpeg.tar.xz
+          tar -xJf /tmp/ffmpeg.tar.xz -C /tmp
+          FFDIR=$(find /tmp -maxdepth 1 -type d -name 'ffmpeg-*-amd64-static' | head -1)
+          cp "$FFDIR/ffmpeg" "$FFDIR/ffprobe" "$HOME/ffmpeg-bin/"
+          chmod +x "$HOME/ffmpeg-bin/ffmpeg" "$HOME/ffmpeg-bin/ffprobe"
+          echo "$HOME/ffmpeg-bin" >> "$GITHUB_PATH"
 
       - name: Download authentic source footage
         shell: bash
