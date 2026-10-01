@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/captain-smit-render-source-test.yml"
+      - "batches/captain-smit-render-source-test.txt"
   workflow_dispatch:
 
 permissions:
