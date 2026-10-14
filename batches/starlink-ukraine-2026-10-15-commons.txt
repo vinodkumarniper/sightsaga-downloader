@@ -1,0 +1,17 @@
+# slug|Commons search|max results  (freely licensed only: CC0 / PD / CC BY / CC BY-SA / GODL)
+musk|Elon Musk portrait|4
+zelensky|Volodymyr Zelensky 2025|4
+zelensky_off|Zelensky official portrait president.gov.ua|2
+trump|Donald Trump official portrait 2025|2
+starlink_ua|Starlink Ukraine|8
+starlink_dish|Starlink terminal dish antenna|5
+starlink_sats|Starlink satellites stack SpaceX|5
+falcon9|Falcon 9 Starlink launch|4
+drone_ua|Ukrainian FPV drone operator|8
+interceptor|interceptor drone Ukraine|5
+shahed|Shahed drone|3
+starshield|Starshield SpaceX|2
+sikorski|Radosław Sikorski 2025|2
+kyiv_night|Kyiv night blackout|4
+eutelsat|Eutelsat OneWeb satellite|3
+india_sat|ISRO satellite GSAT|3

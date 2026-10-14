@@ -1,0 +1,27 @@
+name: Starlink Ukraine Commons assets
+
+on:
+  push:
+    branches: ["assets/starlink-ukraine-2026-10-15"]
+    paths:
+      - ".github/workflows/starlink-ukraine-commons.yml"
+      - "batches/starlink-ukraine-2026-10-15-commons.txt"
+      - "scripts/commons_fetch.py"
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch freely licensed images from Wikimedia Commons
+        run: python3 scripts/commons_fetch.py batches/starlink-ukraine-2026-10-15-commons.txt downloads
+      - uses: actions/upload-artifact@v4
+        with:
+          name: starlink-ukraine-commons-${{ github.run_number }}
+          path: downloads/
+          if-no-files-found: error
+          retention-days: 7
