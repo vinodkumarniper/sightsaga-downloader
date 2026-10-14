@@ -1,0 +1,20 @@
+# kind|key|source|start|duration   (yt = YouTube clip section; commons = Wikimedia Commons search, N images; subs = captions only)
+yt|B02a_1|https://www.youtube.com/watch?v=1m9eGhCfWHM|0|150
+yt|B02a_2|https://www.youtube.com/watch?v=_XIfgioTtTk|0|150
+yt|B03a_1|https://www.youtube.com/watch?v=EF_IOGpPcCE|0|150
+yt|B03a_2|https://www.youtube.com/watch?v=8B1yYk-S3Jc|0|150
+yt|B04a_1|https://www.youtube.com/watch?v=VliPqmeQZdU|0|150
+yt|B04a_2|https://www.youtube.com/watch?v=k6yC6t0N1lw|0|150
+yt|B05a_1|https://www.youtube.com/watch?v=dJQQWihWzqI|0|150
+yt|B06b_1|https://www.youtube.com/watch?v=UNIKec2LgfQ|0|180
+subs|B06b_full|https://www.youtube.com/watch?v=B_YIcE10GY0|0|0
+yt|B04c_1|https://www.youtube.com/watch?v=Hzkh4XtFpoo|0|120
+yt|B07a_1|https://www.youtube.com/watch?v=HTNn9HcW3uY|0|120
+yt|B07b_1|https://www.youtube.com/watch?v=2kiyEVmXWQI|0|120
+yt|B08a_1|https://www.youtube.com/watch?v=BQEuGSZmKXI|0|120
+commons|C_srilanka|2022 Sri Lankan protests presidential palace|4|0
+commons|C_bangladesh|2024 Bangladesh quota reform movement Dhaka|4|0
+commons|C_nepal|2025 Nepalese Gen Z protests|4|0
+commons|C_imran|Imran Khan|3|0
+commons|C_balen|Balendra Shah|3|0
+commons|C_yunus|Muhammad Yunus 2024|3|0

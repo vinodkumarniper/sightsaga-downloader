@@ -1,0 +1,34 @@
+name: After File footage
+
+on:
+  push:
+    branches: ["assets/after-file-2026-10-15"]
+    paths:
+      - ".github/workflows/after-file-footage.yml"
+      - "batches/after-file-2026-10-15.txt"
+      - "scripts/after_file_fetch.py"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install yt-dlp and ffmpeg
+        run: |
+          sudo apt-get update && sudo apt-get install --yes ffmpeg
+          python3 -m pip install --upgrade yt-dlp
+      - name: Fetch clips and Commons images
+        run: python3 scripts/after_file_fetch.py batches/after-file-2026-10-15.txt downloads
+      - name: Commit results to this branch (artifact storage is not reachable from the editing sandbox)
+        run: |
+          mkdir -p assets/after-file
+          cp -r downloads/* assets/after-file/ || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add assets/after-file
+          git commit -m "After File footage and manifest [skip ci]" || echo "nothing to commit"
+          git push
