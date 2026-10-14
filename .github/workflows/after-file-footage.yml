@@ -7,6 +7,7 @@ on:
       - ".github/workflows/after-file-footage.yml"
       - "batches/after-file-2026-10-15.txt"
       - "scripts/after_file_fetch.py"
+      - "batches/after-file-round2.trigger"
 
 permissions:
   contents: write
