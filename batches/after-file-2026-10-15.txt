@@ -1,21 +1,6 @@
-# round 2: Wikimedia Commons only (YouTube blocks runner IPs). kind|key|query|N|filetype
-commons|V_srilanka|2022 Sri Lankan protests|3|video
-commons|V_nepal|2025 Nepalese Gen Z protests|3|video
-commons|V_bangladesh|Bangladesh quota reform movement 2024|3|video
-commons|D_sl_aragalaya|Aragalaya Sri Lanka 2022|5|bitmap
-commons|D_sl_galleface|Gotagogama Galle Face protest|4|bitmap
-commons|D_sl_palace|President's House Colombo protesters July 2022|4|bitmap
-commons|D_np_parliament|Federal Parliament Nepal fire 2025|4|bitmap
-commons|D_np_singha|Singha Durbar fire September 2025|4|bitmap
-commons|D_np_kathmandu|Gen Z protest Kathmandu September 2025|5|bitmap
-commons|D_bd_aug5|5 August 2024 Dhaka Ganabhaban|4|bitmap
-commons|D_bd_july|July Revolution Bangladesh 2024 Dhaka|4|bitmap
-commons|D_pk_assembly|National Assembly of Pakistan|3|bitmap
-commons|D_balen|Balendra Shah|4|bitmap
-commons|D_spain|Spain housing protest 2026|4|bitmap
-commons|D_spain2|manifestación vivienda Madrid|4|bitmap
-commons|D_france|France student protest 2026|4|bitmap
-commons|D_france2|manifestation lycéens Paris|4|bitmap
-commons|D_india|Cockroach Janta Party protest|4|bitmap
-commons|D_india2|Jantar Mantar protest 2026|4|bitmap
-commons|D_india3|Election Commission of India protest|3|bitmap
+# round 3: retry rate-limited Commons queries. kind|key|query|N|filetype
+commons|E_balen|Balendra Shah|3|bitmap
+commons|E_balen2|Balen Shah Prime Minister Nepal 2026|3|bitmap
+commons|E_pk_assembly|Parliament House Islamabad|3|bitmap
+commons|E_india_cjp|Cockroach Janta Party|3|bitmap
+commons|E_india_ec|Nirvachan Sadan Election Commission India|2|bitmap
