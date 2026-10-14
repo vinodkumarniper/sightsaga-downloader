@@ -1,0 +1,274 @@
+[
+ {
+  "key": "B02a_1",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=1m9eGhCfWHM",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] 1m9eGhCfWHM: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] 1m9eGhCfWHM: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B02a_2",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=_XIfgioTtTk",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] _XIfgioTtTk: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] _XIfgioTtTk: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B03a_1",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=EF_IOGpPcCE",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] EF_IOGpPcCE: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] EF_IOGpPcCE: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B03a_2",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=8B1yYk-S3Jc",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] 8B1yYk-S3Jc: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] 8B1yYk-S3Jc: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B04a_1",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=VliPqmeQZdU",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] VliPqmeQZdU: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] VliPqmeQZdU: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B04a_2",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=k6yC6t0N1lw",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] k6yC6t0N1lw: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] k6yC6t0N1lw: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B05a_1",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=dJQQWihWzqI",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] dJQQWihWzqI: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] dJQQWihWzqI: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B06b_1",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=UNIKec2LgfQ",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] UNIKec2LgfQ: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] UNIKec2LgfQ: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B06b_full",
+  "kind": "subs",
+  "source": "https://www.youtube.com/watch?v=B_YIcE10GY0",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] B_YIcE10GY0: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] B_YIcE10GY0: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B04c_1",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=Hzkh4XtFpoo",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] Hzkh4XtFpoo: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] Hzkh4XtFpoo: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B07a_1",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=HTNn9HcW3uY",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] HTNn9HcW3uY: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] HTNn9HcW3uY: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B07b_1",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=2kiyEVmXWQI",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] 2kiyEVmXWQI: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] 2kiyEVmXWQI: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "B08a_1",
+  "kind": "yt",
+  "source": "https://www.youtube.com/watch?v=BQEuGSZmKXI",
+  "meta_error": "e missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] BQEuGSZmKXI: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+  "ok": false,
+  "error": ". Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nWARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\nERROR: [youtube] BQEuGSZmKXI: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+ },
+ {
+  "key": "C_srilanka",
+  "kind": "commons",
+  "ok": false,
+  "error": "no CC/PD results",
+  "query": "2022 Sri Lankan protests presidential palace"
+ },
+ {
+  "key": "C_bangladesh",
+  "kind": "commons",
+  "file": "C_bangladesh_1.jpg",
+  "title": "File:3.Bangladesh quota reform movement 2024.jpg",
+  "license": "CC BY-SA 4.0",
+  "artist": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:Rayhan9d?action=edit&amp;redlink=1\" title=\"User:Rayhan9d (page does not exist)\" class=\"new\" typeof=\"mw:LocalizedAttrs\" data-mw-i18n='",
+  "date": "2024-07-11 00:22:27",
+  "page": "https://commons.wikimedia.org/wiki/File%3A3.Bangladesh_quota_reform_movement_2024.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_bangladesh",
+  "kind": "commons",
+  "file": "C_bangladesh_2.jpg",
+  "title": "File:2024 Bangladesh Quota Reform Movement.jpg",
+  "license": "CC BY 4.0",
+  "artist": "Rownak Shahriar Ruhan",
+  "date": "2024-07-12",
+  "page": "https://commons.wikimedia.org/wiki/File%3A2024_Bangladesh_Quota_Reform_Movement.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_bangladesh",
+  "kind": "commons",
+  "file": "C_bangladesh_3.jpg",
+  "title": "File:4.Bangladesh quota reform movement 2024.jpg",
+  "license": "CC BY-SA 4.0",
+  "artist": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:Rayhan9d?action=edit&amp;redlink=1\" title=\"User:Rayhan9d (page does not exist)\" class=\"new\" typeof=\"mw:LocalizedAttrs\" data-mw-i18n='",
+  "date": "2024-07-11 00:31:51",
+  "page": "https://commons.wikimedia.org/wiki/File%3A4.Bangladesh_quota_reform_movement_2024.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_bangladesh",
+  "kind": "commons",
+  "file": "C_bangladesh_4.jpg",
+  "title": "File:9.Bangladesh quota reform movement 2024.jpg",
+  "license": "CC BY-SA 4.0",
+  "artist": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:Rayhan9d?action=edit&amp;redlink=1\" title=\"User:Rayhan9d (page does not exist)\" class=\"new\" typeof=\"mw:LocalizedAttrs\" data-mw-i18n='",
+  "date": "2024-07-06 17:18:04",
+  "page": "https://commons.wikimedia.org/wiki/File%3A9.Bangladesh_quota_reform_movement_2024.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_nepal",
+  "kind": "commons",
+  "file": "C_nepal_1.jpg",
+  "title": "File:2025 Nepalese Gen Z protesters infront of Bharatpur mahanagarpalika office.jpg",
+  "license": "CC BY-SA 4.0",
+  "artist": "<a href=\"//commons.wikimedia.org/wiki/User:%E0%A4%B9%E0%A4%BF%E0%A4%AE%E0%A4%BE%E0%A4%B2_%E0%A4%B8%E0%A5%81%E0%A4%B5%E0%A5%87%E0%A4%A6%E0%A5%80\" title=\"User:हिमाल सुवेदी\">हिमाल सुवेदी</a>",
+  "date": "2025-09-09 15:12:39",
+  "page": "https://commons.wikimedia.org/wiki/File%3A2025_Nepalese_Gen_Z_protesters_infront_of_Bharatpur_mahanagarpalika_office.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_nepal",
+  "kind": "commons",
+  "file": "C_nepal_2.jpg",
+  "title": "File:2025 Nepalese Gen Z movement protesters with flag of Nepal.jpg",
+  "license": "CC BY-SA 4.0",
+  "artist": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:%E0%A4%B9%E0%A4%BF%E0%A4%AE%E0%A4%BE%E0%A4%B2_%E0%A4%B8%E0%A5%81%E0%A4%B5%E0%A5%87%E0%A4%A6%E0%A5%80\" title=\"User:हिमाल सुवेदी\">हिमाल",
+  "date": "2025-09-09 14:55:31",
+  "page": "https://commons.wikimedia.org/wiki/File%3A2025_Nepalese_Gen_Z_movement_protesters_with_flag_of_Nepal.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_nepal",
+  "kind": "commons",
+  "file": "C_nepal_3.jpg",
+  "title": "File:2025 Nepalese Gen Z protesters with map of Nepal 02.jpg",
+  "license": "CC BY-SA 4.0",
+  "artist": "<a href=\"//commons.wikimedia.org/wiki/User:%E0%A4%B9%E0%A4%BF%E0%A4%AE%E0%A4%BE%E0%A4%B2_%E0%A4%B8%E0%A5%81%E0%A4%B5%E0%A5%87%E0%A4%A6%E0%A5%80\" title=\"User:हिमाल सुवेदी\">हिमाल सुवेदी</a>",
+  "date": "2025-09-09 14:56:43",
+  "page": "https://commons.wikimedia.org/wiki/File%3A2025_Nepalese_Gen_Z_protesters_with_map_of_Nepal_02.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_nepal",
+  "kind": "commons",
+  "file": "C_nepal_4.jpg",
+  "title": "File:2025 Nepalese Gen Z movement protesters with map of nepal.jpg",
+  "license": "CC BY-SA 4.0",
+  "artist": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:%E0%A4%B9%E0%A4%BF%E0%A4%AE%E0%A4%BE%E0%A4%B2_%E0%A4%B8%E0%A5%81%E0%A4%B5%E0%A5%87%E0%A4%A6%E0%A5%80\" title=\"User:हिमाल सुवेदी\">हिमाल",
+  "date": "2025-09-09 14:56:30",
+  "page": "https://commons.wikimedia.org/wiki/File%3A2025_Nepalese_Gen_Z_movement_protesters_with_map_of_nepal.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_imran",
+  "kind": "commons",
+  "file": "C_imran_1.jpg",
+  "title": "File:Imran Khan Matru Ki Bijlee Ka Mandola.jpg",
+  "license": "CC BY 3.0",
+  "artist": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Bollywood_Hungama\" class=\"extiw\" title=\"w:en:Bollywood Hungama\"><span title=\"news provider related to film industry, film reviews and box office reports\"",
+  "date": "2012-12-18 11:31:11",
+  "page": "https://commons.wikimedia.org/wiki/File%3AImran_Khan_Matru_Ki_Bijlee_Ka_Mandola.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_imran",
+  "kind": "commons",
+  "file": "C_imran_2.jpg",
+  "title": "File:Imran Khan in Islamabad - 2018 (29559549217) (cropped).jpg",
+  "license": "Public domain",
+  "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/9364837@N06\">U.S. Department of State</a> from United States",
+  "date": "2018-09-05 15:48",
+  "page": "https://commons.wikimedia.org/wiki/File%3AImran_Khan_in_Islamabad_-_2018_%2829559549217%29_%28cropped%29.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_imran",
+  "kind": "commons",
+  "file": "C_imran_3.jpg",
+  "title": "File:Imran Khan The Front Row.jpg",
+  "license": "CC BY 3.0",
+  "artist": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Bollywood_Hungama\" class=\"extiw\" title=\"w:en:Bollywood Hungama\"><span title=\"news provider related to film industry, film reviews and box office reports\"",
+  "date": "",
+  "page": "https://commons.wikimedia.org/wiki/File%3AImran_Khan_The_Front_Row.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_balen",
+  "kind": "commons",
+  "ok": false,
+  "error": "<HTTPError 429: 'Too many requests (f061ab2)'>",
+  "query": "Balendra Shah"
+ },
+ {
+  "key": "C_yunus",
+  "kind": "commons",
+  "file": "C_yunus_1.jpg",
+  "title": "File:Muhammad Yunus (cropped).jpg",
+  "license": "CC BY 2.0",
+  "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/32104790@N02\">University of Salford Press Office</a>",
+  "date": "2013-05-18 07:53",
+  "page": "https://commons.wikimedia.org/wiki/File%3AMuhammad_Yunus_%28cropped%29.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_yunus",
+  "kind": "commons",
+  "file": "C_yunus_2.jpg",
+  "title": "File:Professor Muhammad Yunus- Building Social Business Summit.jpg",
+  "license": "CC BY 2.0",
+  "artist": "University of Salford Press Office",
+  "date": "2013-05-18 08:43:54",
+  "page": "https://commons.wikimedia.org/wiki/File%3AProfessor_Muhammad_Yunus-_Building_Social_Business_Summit.jpg",
+  "ok": true
+ },
+ {
+  "key": "C_yunus",
+  "kind": "commons",
+  "file": "C_yunus_3.jpg",
+  "title": "File:Professor Muhammad Yunus Keynote Speech Rohingya Crisis United Nations Headquarters 2024-09-25 (PID-0006191).jpg",
+  "license": "Public domain",
+  "artist": "<bdi><a rel=\"mw:WikiLink/Interwiki\" href=\"https://en.wikipedia.org/wiki/en:Press%20Information%20Department\" title=\"w:en:Press Information Department\" class=\"extiw\"><span title=\"A department of the Ba",
+  "date": "25 September 2024, 14:27:43<span class=\"",
+  "page": "https://commons.wikimedia.org/wiki/File%3AProfessor_Muhammad_Yunus_Keynote_Speech_Rohingya_Crisis_United_Nations_Headquarters_2024-09-25_%28PID-0006191%29.jpg",
+  "ok": true
+ }
+]
