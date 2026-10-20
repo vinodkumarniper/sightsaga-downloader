@@ -1,0 +1,27 @@
+name: SightSaga Hindi local alignment resources
+on:
+  push:
+    paths:
+      - ".github/workflows/hindi-local-alignment-20261020.yml"
+permissions:
+  contents: read
+jobs:
+  resources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install huggingface_hub
+      - name: Download free local multilingual recognition model
+        run: |
+          python - <<'PY'
+          from huggingface_hub import snapshot_download
+          snapshot_download("Systran/faster-whisper-base", local_dir="resources/whisper-base", allow_patterns=["config.json","model.bin","tokenizer.json","vocabulary.json","vocabulary.txt"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sightsaga-local-hindi-alignment
+          path: resources/
+          retention-days: 1
