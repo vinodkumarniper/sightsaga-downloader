@@ -1,0 +1,30 @@
+name: SightSaga MOP and MOAB source footage
+on:
+  push:
+    paths:
+      - ".github/workflows/iran-bomb-footage-20261020.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install downloader
+        run: python -m pip install .
+      - name: Download official public-domain footage
+        run: |
+          sightsaga-download --output-dir downloads --max-downloads 2 "https://www.dvidshub.net/video/968143/gbu-57-massive-ordinance-penetrator-test" "https://www.dvidshub.net/video/519122/gbu-43-b-moab-2003-test-b-roll-color"
+      - name: Upload sources and metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sightsaga-mop-moab-sources
+          path: downloads/
+          if-no-files-found: error
+          retention-days: 7
