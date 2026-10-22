@@ -57,7 +57,8 @@ jobs:
             if [ "$(stat -c%s "$f")" -gt 90000000 ]; then
               ffmpeg -nostdin -loglevel error -y -i "$f" -vf "scale=-2:720" -c:v libx264 -crf 24 -preset veryfast -c:a aac -b:a 128k "${f%.*}_720.mp4" && rm "$f" && f="${f%.*}_720.mp4"
             fi
-            rel="${f#downloads/}"; safe="${rel//\//__}"
+            rel="${f#downloads/}"; i=$((${i:-0}+1)); safe="${rel%%/*}_${i}.${f##*.}"
+            echo "${safe}|${rel}" >> out/names.txt
             key=$(openssl rand -hex 32); iv=$(openssl rand -hex 16)
             openssl enc -aes-256-cbc -K "$key" -iv "$iv" -in "$f" -out "out/${safe}.enc"
             printf '%s:%s' "$key" "$iv" | openssl pkeyutl -encrypt -pubin -inkey "$PUB" -pkeyopt rsa_padding_mode:oaep -out "out/${safe}.key"
