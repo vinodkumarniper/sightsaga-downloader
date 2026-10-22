@@ -1,0 +1,48 @@
+name: Private media pull (encrypted delivery)
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Direct media URL (not echoed)"
+        required: true
+        type: string
+      name:
+        description: "Output file name"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch and encrypt
+        shell: bash
+        env:
+          SRC: ${{ inputs.url }}
+          NAME: ${{ inputs.name }}
+        run: |
+          set -eu
+          echo "::add-mask::${SRC}"
+          mkdir -p out
+          curl -fsSL "$SRC" -o media.bin
+          key=$(openssl rand -hex 32); iv=$(openssl rand -hex 16)
+          openssl enc -aes-256-cbc -K "$key" -iv "$iv" -in media.bin -out "out/${NAME}.enc"
+          printf '%s:%s' "$key" "$iv" | openssl pkeyutl -encrypt -pubin -inkey keys/tbm-explainer-2026-10-22.pub.pem -pkeyopt rsa_padding_mode:oaep -out "out/${NAME}.key"
+          rm media.bin
+      - name: Commit encrypted file
+        shell: bash
+        env:
+          NAME: ${{ inputs.name }}
+        run: |
+          set -eu
+          cd out && git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "private media (encrypted) [skip ci]"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" "HEAD:refs/heads/assets/private-${NAME%.*}"
