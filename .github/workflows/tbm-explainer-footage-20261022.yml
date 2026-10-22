@@ -1,0 +1,78 @@
+name: TBM explainer footage (encrypted delivery)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/tbm-explainer-footage-20261022.yml"
+      - "batches/tbm-explainer-2026-10-22.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ffmpeg and downloader
+        run: |
+          sudo apt-get update -qq && sudo apt-get install --yes ffmpeg
+          python -m pip install .
+
+      - name: Download each source (failures recorded, not fatal)
+        shell: bash
+        run: |
+          set -u
+          mkdir -p downloads
+          : > downloads/status.txt
+          while IFS='|' read -r name url; do
+            [[ -z "${name}" || "${name}" == \#* ]] && continue
+            echo "=== ${name}"
+            if timeout 600 sightsaga-download --output-dir "downloads/${name}" --max-downloads 1 "${url}"; then
+              n=$(find "downloads/${name}" -type f \( -name '*.mkv' -o -name '*.mp4' -o -name '*.webm' \) | wc -l)
+              echo "${name}|files=${n}|${url}" >> downloads/status.txt
+            else
+              echo "${name}|FAILED|${url}" >> downloads/status.txt
+            fi
+          done < batches/tbm-explainer-2026-10-22.txt
+          cat downloads/status.txt
+
+      - name: Encrypt media with the session public key
+        shell: bash
+        run: |
+          set -eu
+          PUB=keys/tbm-explainer-2026-10-22.pub.pem
+          mkdir -p out
+          cp downloads/status.txt out/status.txt
+          find downloads -name 'manifest.jsonl' -exec sh -c 'cat "$1" >> out/manifest.jsonl' _ {} \;
+          find downloads -type f \( -name '*.mkv' -o -name '*.mp4' -o -name '*.webm' -o -name '*.jpg' -o -name '*.webp' -o -name '*.png' \) | while read -r f; do
+            if [ "$(stat -c%s "$f")" -gt 90000000 ]; then
+              ffmpeg -nostdin -loglevel error -y -i "$f" -vf "scale=-2:720" -c:v libx264 -crf 24 -preset veryfast -c:a aac -b:a 128k "${f%.*}_720.mp4" && rm "$f" && f="${f%.*}_720.mp4"
+            fi
+            rel="${f#downloads/}"; safe="${rel//\//__}"
+            key=$(openssl rand -hex 32); iv=$(openssl rand -hex 16)
+            openssl enc -aes-256-cbc -K "$key" -iv "$iv" -in "$f" -out "out/${safe}.enc"
+            printf '%s:%s' "$key" "$iv" | openssl pkeyutl -encrypt -pubin -inkey "$PUB" -pkeyopt rsa_padding_mode:oaep -out "out/${safe}.key"
+            echo "${safe}|$(stat -c%s "$f")" >> out/sizes.txt
+          done
+          ls -la out
+
+      - name: Commit encrypted bundle to assets branch
+        shell: bash
+        run: |
+          set -eu
+          cd out
+          git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "TBM explainer footage (encrypted) [skip ci]"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:refs/heads/assets/tbm-explainer-2026-10-22

@@ -1,0 +1,19 @@
+# name|url — TBM / China / India explainer footage scout, 22 Oct 2026
+# Hook: 2024 Goyal–Habeck exchange (better-provenance broadcast copies)
+x_republic_goyal_habeck_2024|https://x.com/republic/status/1850543129767932207
+x_timesnow_goyal_habeck_2024|https://x.com/TimesNow/status/1850862069458886845
+x_mylordbebo_goyal_habeck_2024|https://x.com/MyLordBebo/status/1850464586555613267
+# China-made TBMs for India (Chinese state media)
+yt_china_exports_shield_tbm_india|https://www.youtube.com/watch?v=zt3dewTQ_Wo
+yt_china_largest_tbm|https://www.youtube.com/watch?v=FM-PMilk06s
+# How a slurry (Mixshield-type) TBM works — Herrenknecht
+yt_herrenknecht_slurry_tbm|https://www.youtube.com/watch?v=fSwbzvtXON8
+# NHSRCL official
+yt_nhsrcl_cutterhead_sawli|https://www.youtube.com/watch?v=OZGRvFVJnOc
+yt_nhsrcl_excavation_begins|https://www.youtube.com/watch?v=L4I2Lf4YLBw
+yt_nhsrcl_second_tbm_excavation|https://www.youtube.com/watch?v=HvwxlmYB2-4
+li_nhsrcl_second_tbm_excavation|https://www.linkedin.com/posts/bullettrain_the-second-tunnel-boring-machine-has-commenced-activity-7484228924978241537-rMIb
+li_nhsrcl_second_tbm_assembly|https://www.linkedin.com/posts/bullettrain_bharatkagarv-activity-7448693894332170241-BoQR
+li_nhsrcl_vikhroli_assembly|https://www.linkedin.com/posts/bullettrain_the-lowering-and-assembly-of-the-tunnel-boring-activity-7447858314488782848-if-k
+# India response: Herrenknecht eyes India
+yt_herrenknecht_eyes_india_short|https://www.youtube.com/shorts/nn3btcefdXA
