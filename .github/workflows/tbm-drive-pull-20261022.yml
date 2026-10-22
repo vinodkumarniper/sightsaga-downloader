@@ -1,0 +1,54 @@
+name: TBM explainer Drive pull (encrypted delivery)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download from Drive (link-shared files)
+        shell: bash
+        run: |
+          set -u
+          pip install -q gdown
+          mkdir -p downloads out
+          while IFS='|' read -r name id; do
+            [[ -z "${name}" || "${name}" == \#* ]] && continue
+            if gdown --quiet "https://drive.google.com/uc?id=${id}" -O "downloads/${name}.mp4"; then
+              echo "${name}|OK|$(stat -c%s downloads/${name}.mp4)" >> out/status.txt
+            else
+              echo "${name}|FAILED" >> out/status.txt
+            fi
+          done < batches/tbm-explainer-drive-2026-10-22.txt
+          cat out/status.txt
+      - name: Encrypt with the session public key
+        shell: bash
+        run: |
+          set -eu
+          PUB=keys/tbm-explainer-2026-10-22.pub.pem
+          for f in downloads/*.mp4; do
+            [ -e "$f" ] || continue
+            b=$(basename "$f")
+            key=$(openssl rand -hex 32); iv=$(openssl rand -hex 16)
+            openssl enc -aes-256-cbc -K "$key" -iv "$iv" -in "$f" -out "out/${b}.enc"
+            printf '%s:%s' "$key" "$iv" | openssl pkeyutl -encrypt -pubin -inkey "$PUB" -pkeyopt rsa_padding_mode:oaep -out "out/${b}.key"
+          done
+          ls -la out
+      - name: Commit encrypted bundle
+        shell: bash
+        run: |
+          set -eu
+          cd out && git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "TBM Drive pull (encrypted) [skip ci]"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:refs/heads/assets/tbm-explainer-2026-10-22-drive
