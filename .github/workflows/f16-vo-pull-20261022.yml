@@ -1,0 +1,41 @@
+name: F-16 explainer VO pull (encrypted delivery)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "batches/f16-vo-20261022.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch and encrypt
+        shell: bash
+        run: |
+          set -eu
+          mkdir -p out
+          PUB=keys/f16-wheat-2026-10-22.pub.pem
+          while IFS='|' read -r name url; do
+            [[ -z "${name}" || "${name}" == \#* ]] && continue
+            curl -fsSL --retry 3 "$url" -o "$name"
+            key=$(openssl rand -hex 32); iv=$(openssl rand -hex 16)
+            openssl enc -aes-256-cbc -K "$key" -iv "$iv" -in "$name" -out "out/${name}.enc"
+            printf '%s:%s' "$key" "$iv" | openssl pkeyutl -encrypt -pubin -inkey "$PUB" -pkeyopt rsa_padding_mode:oaep -out "out/${name}.key"
+          done < batches/f16-vo-20261022.txt
+          ls -la out
+      - name: Commit encrypted file
+        shell: bash
+        run: |
+          set -eu
+          cd out && git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "F-16 VO (encrypted) [skip ci]"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:refs/heads/assets/f16-vo-2026-10-22
