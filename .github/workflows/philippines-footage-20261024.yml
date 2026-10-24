@@ -1,0 +1,32 @@
+name: Philippines footage 20261024
+on:
+  push:
+    paths:
+      - ".github/workflows/philippines-footage-20261024.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -U yt-dlp
+      - name: Download public video links
+        run: |
+          mkdir -p downloads
+          for url in 'https://t.co/fgqEdxJNM3' 'https://t.co/9gBkcbihrr'; do
+            yt-dlp --no-playlist --socket-timeout 30 --write-info-json --write-description -f 'best[ext=mp4]/best' -o 'downloads/%(extractor)s_%(id)s.%(ext)s' "$url" || true
+          done
+          find downloads -type f
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sightsaga-philippines-footage
+          path: downloads/
+          if-no-files-found: warn
+          retention-days: 7
