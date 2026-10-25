@@ -1,0 +1,68 @@
+name: Tawang decode assets (encrypted delivery)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/tawang-decode-20261025.yml"
+      - "tools/tawang_fetch.py"
+      - "batches/tawang-vo-20261025.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install --yes ffmpeg
+          python -m pip install -q "yt-dlp>=2025.9.5" playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Fetch assets (failures logged, not fatal)
+        run: python tools/tawang_fetch.py vo commons wiki screenshots || true
+
+      - name: Shrink large videos
+        shell: bash
+        run: |
+          find downloads -type f \( -name '*.mp4' -o -name '*.mkv' -o -name '*.webm' \) | while read -r f; do
+            o="${f%.*}_720.mp4"
+            ffmpeg -nostdin -loglevel error -y -i "$f" -t 420 -vf "scale=-2:720" -c:v libx264 -crf 26 -preset veryfast -an "$o" && rm "$f"
+          done
+          du -sh downloads; ls -laR downloads | head -200
+
+      - name: Encrypt bundle with the session public key
+        shell: bash
+        run: |
+          set -eu
+          PUB=keys/tawang-2026-10-25.pub.pem
+          mkdir -p out
+          cp downloads/manifest.jsonl out/manifest.jsonl || true
+          tar -cf bundle.tar downloads
+          key=$(openssl rand -hex 32); iv=$(openssl rand -hex 16)
+          openssl enc -aes-256-cbc -K "$key" -iv "$iv" -in bundle.tar -out bundle.enc
+          printf '%s:%s' "$key" "$iv" | openssl pkeyutl -encrypt -pubin -inkey "$PUB" -pkeyopt rsa_padding_mode:oaep -out out/bundle.key
+          split -b 90M -d bundle.enc out/bundle.enc.part
+          ls -la out
+
+      - name: Commit encrypted bundle to assets branch
+        shell: bash
+        run: |
+          set -eu
+          cd out
+          git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "Tawang decode assets (encrypted) [skip ci]"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:refs/heads/assets/tawang-2026-10-25
