@@ -1,0 +1,83 @@
+name: Shamonda original sources 20261026
+on:
+  push:
+    paths:
+      - ".github/workflows/shamonda-sources-20261026.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -U yt-dlp
+      - run: sudo apt-get update -qq && sudo apt-get install -y ffmpeg
+      - name: Download complete original media
+        run: |
+          cat > /tmp/shav.py <<'PY'
+          import json, pathlib, subprocess, urllib.request, urllib.parse, concurrent.futures
+          out=pathlib.Path("downloads");out.mkdir(exist_ok=True)
+          videos=[
+          ("SHAV_F01_france3-aveyron-farms","DvE_QjSKB-0"),
+          ("SHAV_F02_br24-bavaria-cattle","efjEKPG3UMA"),
+          ("SHAV_F03_m6info-human-case","eXmp4WWA_Hs"),
+          ("SHAV_F04_agronews-spain-farms","NGxRNkxuFd0"),
+          ("SHAV_F05_pirbright-culicoides-lifecycle","sw_xk4qWPU8"),
+          ("SHAV_F06_pirbright-carpenter-culicoides-talk","T7EImy_xWy0"),
+          ("SHAV_F07_eduvet-culicoides","QO9GlNrgSOo"),
+          ("SHAV_F08_extra-human-case-news","sBzJN_Vsorw"),
+          ("SHAV_F09_extra-dairy-farms-de","dXmUdsiYUvo")]
+          stills=[
+          ("SHAV_P01_culicoides-brevitarsis-SEM.jpg","CSIRO ScienceImage 1791 SEM of a biting midge Culicoides brevitarsis.jpg"),
+          ("SHAV_P02_culicoides-imicola.jpg","Culicoides-imicola.jpg"),
+          ("SHAV_P03_biting-midge.jpg","BitingMidge.jpg"),
+          ("SHAV_P04_midge-on-skin.jpg","Biting Midge on my leg.jpg"),
+          ("SHAV_P05_midge-swarm.webm","Highland midge (Culicoides impunctatus) swarm biting me!.webm"),
+          ("SHAV_P06_mosquito-vs-midge.jpg","Mosquito (Ochlerotatus annulipes) and Midge (Culicoides impunctatus) biting human (me).jpg")]
+          def video(item):
+           name,ident=item
+           url="https://www.youtube.com/watch?v="+ident
+           cmd=["yt-dlp","--no-playlist","--socket-timeout","20","--retries","1","--extractor-retries","1","--dump-single-json","--skip-download",url]
+           try:
+            p=subprocess.run(cmd,capture_output=True,text=True,timeout=120)
+            if p.returncode: return dict(id=name,url=url,status="MISSING",error=p.stderr[-1600:])
+            info=json.loads(p.stdout); channel=info.get("channel","")
+            (out/(name+".info.json")).write_text(json.dumps(info))
+            if name.startswith(("SHAV_F08","SHAV_F09")):
+             allow=["france","br24","bayerischer","m6","bbc","dw ","deutsche welle","reuters","afp","wion","ndtv","tagesschau","zdf","ard","euronews","rtl"]
+             if not any(s in channel.lower() for s in allow): return dict(id=name,url=url,channel=channel,status="MISSING",error="Broadcaster identity not confirmed; no download")
+            cmd=["yt-dlp","--no-playlist","--socket-timeout","20","--retries","1","--fragment-retries","1","--write-info-json","-f","bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]","--merge-output-format","mp4","-o",str(out/(name+".%(ext)s")),url]
+            p=subprocess.run(cmd,capture_output=True,text=True,timeout=900)
+            return dict(id=name,url=url,channel=channel,upload_date=info.get("upload_date"),duration=info.get("duration"),status="DOWNLOADED" if p.returncode==0 else "MISSING",error=p.stderr[-1200:])
+           except Exception as e: return dict(id=name,url=url,status="MISSING",error=str(e))
+          def still(item):
+           name,title=item
+           url="https://commons.wikimedia.org/wiki/File:"+urllib.parse.quote(title)
+           try:
+            q=urllib.parse.urlencode(dict(action="query",format="json",titles="File:"+title,prop="imageinfo",iiprop="url|size|extmetadata"))
+            req=urllib.request.Request("https://commons.wikimedia.org/w/api.php?"+q,headers={"User-Agent":"ScienceReelMediaArchive/1.0 (source attribution collection)"})
+            data=json.load(urllib.request.urlopen(req,timeout=40))
+            page=next(iter(data["query"]["pages"].values()))
+            inf=page["imageinfo"][0]
+            req=urllib.request.Request(inf["url"],headers={"User-Agent":"ScienceReelMediaArchive/1.0"})
+            with urllib.request.urlopen(req,timeout=90) as src,open(out/name,"wb") as dst:
+             while chunk:=src.read(1024*1024): dst.write(chunk)
+            return dict(id=name,url=url,status="DOWNLOADED",metadata=inf)
+           except Exception as e:return dict(id=name,url=url,status="MISSING",error=str(e))
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+           results=list(ex.map(video,videos))+list(ex.map(still,stills))
+          (out/"download_results.json").write_text(json.dumps(results,indent=2))
+          for r in results: print(r["id"],r["status"],r.get("channel",""),r.get("error","")[:160])
+          
+          PY
+          python /tmp/shav.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shamonda-original-sources
+          path: downloads/
+          retention-days: 7
