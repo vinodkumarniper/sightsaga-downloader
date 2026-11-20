@@ -1,0 +1,57 @@
+name: Voyager 1 stills (NASA public domain via Commons)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/voyager-stills-20261120.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Fetch stills
+        shell: bash
+        run: |
+          mkdir -p out && cd out
+          curl -fsSL -A "SightSagaArchive/1.0" -o PBD_nasa_1600.jpg https://science.nasa.gov/wp-content/uploads/2023/09/PIA23645_PaleBlueDotRevisited_1600.jpg || echo MISSING pbd
+          cat > /tmp/c.py <<'PY'
+          import json, urllib.request, urllib.parse, pathlib
+          UA={"User-Agent":"SightSagaArchive/1.0 (attribution collection)"}
+          out=pathlib.Path(".")
+          def api(**q):
+              q.update(format="json")
+              return json.load(urllib.request.urlopen(urllib.request.Request("https://commons.wikimedia.org/w/api.php?"+urllib.parse.urlencode(q),headers=UA),timeout=40))
+          log=[]
+          searches={"launch":"Voyager 1 launch Titan Centaur 1977","jupiter":"Voyager 1 Jupiter Great Red Spot PIA","saturn":"Voyager 1 Saturn PIA","pbd":"PIA23645 Pale Blue Dot Revisited","goldenrecord":"Voyager Golden Record cover"}
+          for key,s in searches.items():
+              r=api(action="query",list="search",srsearch=s,srnamespace=6,srlimit=4)
+              for i,hit in enumerate(r["query"]["search"][:3]):
+                  t=hit["title"]
+                  p=api(action="query",titles=t,prop="imageinfo",iiprop="url|size|extmetadata",iiurlwidth=2000)
+                  page=next(iter(p["query"]["pages"].values()))
+                  inf=page["imageinfo"][0]
+                  url=inf.get("thumburl") or inf["url"]
+                  ext=url.rsplit(".",1)[-1].split("?")[0][:4]
+                  if ext.lower() not in ("jpg","jpeg","png","tif","tiff"): continue
+                  fn=f"{key}_{i}.{ext}"
+                  try:
+                      with urllib.request.urlopen(urllib.request.Request(url,headers=UA),timeout=90) as a, open(fn,"wb") as b: b.write(a.read())
+                      md=inf.get("extmetadata",{})
+                      log.append(dict(file=fn,title=t,url=url,credit=md.get("Credit",{}).get("value","")[:200],license=md.get("LicenseShortName",{}).get("value",""),desc=md.get("ImageDescription",{}).get("value","")[:300]))
+                  except Exception as e: log.append(dict(file=fn,title=t,error=str(e)))
+          pathlib.Path("stills_log.json").write_text(json.dumps(log,indent=1))
+          PY
+          python3 /tmp/c.py; ls -la
+      - name: Commit
+        shell: bash
+        run: |
+          set -eu; cd out; git init -q
+          git config user.name "github-actions[bot]"; git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -A; git commit -qm "Voyager stills [skip ci]"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:refs/heads/assets/voyager-stills-2026-11-20
