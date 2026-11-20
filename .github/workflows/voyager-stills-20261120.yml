@@ -21,33 +21,34 @@ jobs:
           mkdir -p out && cd out
           curl -fsSL -A "SightSagaArchive/1.0" -o PBD_nasa_1600.jpg https://science.nasa.gov/wp-content/uploads/2023/09/PIA23645_PaleBlueDotRevisited_1600.jpg || echo MISSING pbd
           cat > /tmp/c.py <<'PY'
-          import json, urllib.request, urllib.parse, pathlib
-          UA={"User-Agent":"SightSagaArchive/1.0 (attribution collection)"}
-          out=pathlib.Path(".")
-          def api(**q):
-              q.update(format="json")
-              return json.load(urllib.request.urlopen(urllib.request.Request("https://commons.wikimedia.org/w/api.php?"+urllib.parse.urlencode(q),headers=UA),timeout=40))
+          import re, time, urllib.request, urllib.parse, json, pathlib
+          UA={"User-Agent":"SightSagaArchive/1.0 (contact via github; attribution collection)"}
           log=[]
-          searches={"launch":"Voyager 1 launch Titan Centaur 1977","jupiter":"Voyager 1 Jupiter Great Red Spot PIA","saturn":"Voyager 1 Saturn PIA","pbd":"PIA23645 Pale Blue Dot Revisited","goldenrecord":"Voyager Golden Record cover"}
-          for key,s in searches.items():
-              r=api(action="query",list="search",srsearch=s,srnamespace=6,srlimit=4)
-              for i,hit in enumerate(r["query"]["search"][:3]):
-                  t=hit["title"]
-                  p=api(action="query",titles=t,prop="imageinfo",iiprop="url|size|extmetadata",iiurlwidth=2000)
-                  page=next(iter(p["query"]["pages"].values()))
-                  inf=page["imageinfo"][0]
-                  url=inf.get("thumburl") or inf["url"]
-                  ext=url.rsplit(".",1)[-1].split("?")[0][:4]
-                  if ext.lower() not in ("jpg","jpeg","png","tif","tiff"): continue
-                  fn=f"{key}_{i}.{ext}"
-                  try:
-                      with urllib.request.urlopen(urllib.request.Request(url,headers=UA),timeout=90) as a, open(fn,"wb") as b: b.write(a.read())
-                      md=inf.get("extmetadata",{})
-                      log.append(dict(file=fn,title=t,url=url,credit=md.get("Credit",{}).get("value","")[:200],license=md.get("LicenseShortName",{}).get("value",""),desc=md.get("ImageDescription",{}).get("value","")[:300]))
-                  except Exception as e: log.append(dict(file=fn,title=t,error=str(e)))
+          def get(url,fn):
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(url,headers=UA),timeout=90) as a: data=a.read()
+                  open(fn,"wb").write(data); log.append(dict(file=fn,url=url,bytes=len(data)))
+              except Exception as e: log.append(dict(file=fn,url=url,error=str(e)))
+              time.sleep(4)
+          for key,page in {"launch_nasa":"https://science.nasa.gov/photojournal/voyager-1-launch",
+                           "pbd_nasa":"https://science.nasa.gov/photojournal/pale-blue-dot-revisited",
+                           "v1_mission":"https://science.nasa.gov/mission/voyager/voyager-1/"}.items():
+              try:
+                  html=urllib.request.urlopen(urllib.request.Request(page,headers=UA),timeout=60).read().decode("utf8","ignore")
+                  m=re.search(r'property="og:image" content="([^"]+)"',html)
+                  imgs=list(dict.fromkeys(re.findall(r'https://science\.nasa\.gov/wp-content/uploads/[^"\s?]+\.(?:jpg|jpeg|png)',html)))
+                  log.append(dict(page=page,og=m.group(1) if m else None,imgs=imgs[:12]))
+                  if m: get(m.group(1).split("?")[0],key+".jpg")
+                  for i,u in enumerate(imgs[:4]): get(u,f"{key}_{i}."+u.rsplit(".",1)[-1])
+              except Exception as e: log.append(dict(page=page,error=str(e)))
+              time.sleep(4)
+          for name in ["PIA23645-Earth-PaleBlueDot-6Bkm-Voyager1-orig19900214-upd20200212.jpg","Great Red Spot From Voyager 1.jpg",
+                       "Jupiter and its shrunken Great Red Spot.jpg","Saturn from Voyager 1.jpg","Voyager 1 launch.jpg","Titan 3E Centaur launches Voyager 1.jpg",
+                       "The Sounds of Earth Record Cover - GPN-2000-001978.jpg"]:
+              get("https://commons.wikimedia.org/wiki/Special:FilePath/"+urllib.parse.quote(name)+"?width=2000","commons_"+re.sub(r"[^A-Za-z0-9]+","_",name)[:50]+".jpg")
           pathlib.Path("stills_log.json").write_text(json.dumps(log,indent=1))
           PY
-          python3 /tmp/c.py; ls -la
+          python3 /tmp/c.py || true; ls -la
       - name: Commit
         shell: bash
         run: |
